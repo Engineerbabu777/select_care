@@ -1,3 +1,6 @@
+'use client';
+
+
 import Card from "../Card";
 import IconComponent from "../IconComponent";
 import {
@@ -7,9 +10,13 @@ import {
 	MdEngineering,
 	RiGroup2Fill,
 } from "@/icons/icons";
+import {useRecoilState} from 'recoil';
+import { displayStateAtom } from "@/recoil/display-state";
 
-export default function SidebarMain() {
+export default function SidebarMain(){
+
 	// WILL REMOVE DIVISIONS AT END AS WELL CREATE COMPONENT FOR ICON-DIV!
+	const [display, setDisplay] = useRecoilState(displayStateAtom);
 
 	return (
 		<>
@@ -20,6 +27,7 @@ export default function SidebarMain() {
                         {/* TO ADD USERS/ROLES! */}
 						<div className="">
 							<IconComponent
+							   
 								aside
 								icon={
 									<IoIosAddCircle className={"w-8 m-1 h-8 text-[#016A70]"} />
@@ -32,6 +40,8 @@ export default function SidebarMain() {
 						{/* DISPLAY USERS IN LEFT SECTION! */}
 						<div className="-mb-1">
 							<IconComponent
+							    isClickable
+							    onClick={() => setDisplay({...display,display:'USER'})}
 								aside
 								icon={<RiGroup2Fill className={"w-7 h-7 m-1.5"} />}
 							/>
@@ -40,6 +50,8 @@ export default function SidebarMain() {
 						{/* DISPLAY ROLES IN LEFT SECTION */}
 						<div className="">
 							<IconComponent
+							    isClickable
+							    onClick={() => setDisplay({...display,display:'ROLE'})}
 								aside
 								icon={<FaIdCardClip className={"w-6 h-6 m-2"} />}
 							/>
@@ -47,6 +59,8 @@ export default function SidebarMain() {
 
 						<div className="">
 							<IconComponent
+							    isClickable
+							    onClick={() => setDisplay({...display,display:'DEV'})}
 								aside
 								icon={<MdEngineering className={"w-6 h-6 m-2"} />}
 							/>

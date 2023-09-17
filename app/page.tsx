@@ -1,14 +1,19 @@
 
+'use client';
 
 import HomeLayout from "@/components/Home/HomeLayout";
 import SidebarMain from "@/components/Sidebar/SidebarMain";
+import { displayStateAtom } from "@/recoil/display-state";
+import Main from "@/components/Main/Main";
+import {RecoilRoot,useRecoilState} from 'recoil';
 
 export default function Home() {
+
 
 	// (!AUTHENTICATION) REFERS TO /LOGIN PAGE (WILL IMPLEMENT-AT-END!)!
 
 	return (
-		<>
+		<RecoilRoot>
 			{/* LAYOUT! */}
 			<HomeLayout>
 
@@ -16,12 +21,12 @@ export default function Home() {
 				<SidebarMain />
 
 				{/* CHILD-1 OF HOME-LAYOUT!  */}
-				<div>2</div>
+				 <Main />
 
 				{/* CHILD-2 OF HOME-LAYOUT!  */}
 				<div>3</div>
 
 			</HomeLayout>
-		</>
+		</RecoilRoot>
 	);
 }
