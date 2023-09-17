@@ -1,23 +1,27 @@
+
+
 import HomeLayout from "@/components/Home/HomeLayout";
-
-
+import SidebarMain from "@/components/Sidebar/SidebarMain";
 
 export default function Home() {
 
+	// (!AUTHENTICATION) REFERS TO /LOGIN PAGE (WILL IMPLEMENT-AT-END!)!
 
-  // (!AUTHENTICATION) REFERS TO /LOGIN PAGE (WILL IMPLEMENT-AT-END!)!
+	return (
+		<>
+			{/* LAYOUT! */}
+			<HomeLayout>
 
-  return(<>
+				{/* CHILD-0 OF HOME-LAYOUT!  */}
+				<SidebarMain />
 
-  {/* LAYOUT! */}
-   <HomeLayout>
-    <div>1</div>
+				{/* CHILD-1 OF HOME-LAYOUT!  */}
+				<div>2</div>
 
-    <div>2</div>
+				{/* CHILD-2 OF HOME-LAYOUT!  */}
+				<div>3</div>
 
-    <div>3</div>
-
-   </HomeLayout>
-
-  </>);
+			</HomeLayout>
+		</>
+	);
 }
