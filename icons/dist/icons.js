@@ -1,10 +1,11 @@
 "use strict";
 exports.__esModule = true;
-exports.MdEngineering = exports.AiOutlineLine = exports.FaIdCardClip = exports.RiGroup2Fill = exports.IoIosAddCircle = exports.MdOutlineApps = exports.BiSolidUserCircle = exports.GrApps = exports.PiChatsBold = exports.MdNotifications = void 0;
+exports.MdClose = exports.MdEngineering = exports.AiOutlineLine = exports.FaIdCardClip = exports.RiGroup2Fill = exports.IoIosAddCircle = exports.MdOutlineApps = exports.BiSolidUserCircle = exports.GrApps = exports.PiChatsBold = exports.MdNotifications = void 0;
 var md_1 = require("react-icons/md");
 exports.MdNotifications = md_1.MdNotifications;
 exports.MdOutlineApps = md_1.MdOutlineApps;
 exports.MdEngineering = md_1.MdEngineering;
+exports.MdClose = md_1.MdClose;
 var pi_1 = require("react-icons/pi");
 exports.PiChatsBold = pi_1.PiChatsBold;
 var gr_1 = require("react-icons/gr");
