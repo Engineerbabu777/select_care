@@ -5,7 +5,8 @@ type Props = {
 	name?: String;
 	placeholder?: String;
 	type?: String;
-	require?: Boolean;
+    require?: Boolean;
+    onChange?: unknown; // WILL CHANGE THIS LATER!
 };
 
 export default function Input({
@@ -13,10 +14,11 @@ export default function Input({
 	name,
 	placeholder,
 	type,
-	require = false,
+    require = false,
+    onChange,
 }: Props) {
 
-    
+
 	return (
 		<>
 			{/* LABEL! */}
@@ -26,14 +28,16 @@ export default function Input({
 			>
 				{label}
 			</label>
+			
 			{/* INPUT! */}
-			<input
+			<input 
+				onChange={onChange}
 				required={require}
 				id={name}
 				type={type}
 				name={name}
 				placeholder={placeholder}
-				className="px-2 py-1 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-green-500 placeholder:text-gray-400 text-gray-700 w-full border border-green-500"
+				className="px-2 py-1 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 text-gray-700 w-full border border-blue-500"
 			/>
 		</>
 	);

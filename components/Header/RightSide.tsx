@@ -5,7 +5,7 @@ import {
 	GrApps,
 	MdOutlineApps,
 } from "@/icons/icons";
-import IconComponent from "../IconComponent";
+import IconComponent from "../shared/IconComponent";
 
 export default function RightSide({}) {
 	return (

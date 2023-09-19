@@ -1,7 +1,7 @@
 "use client";
 
-import Card from "../Card";
-import IconComponent from "../IconComponent";
+import Card from "../shared/Card";
+import IconComponent from "../shared/IconComponent";
 import {
 	AiOutlineLine,
 	FaIdCardClip,
@@ -12,32 +12,40 @@ import {
 import { useRecoilState } from "recoil";
 import { displayStateAtom } from "@/recoil/display-state";
 import { useState } from "react";
-import Modal from "../Modal";
+import Modal from "../shared/Modal";
 import UserModalBody from "../Modals/User/Body";
+import RoleModalBody from "../Modals/Role/Body";
 
 export default function SidebarMain() {
 
-	
 	// WILL REMOVE DIVISIONS AT END AS WELL CREATE COMPONENT FOR ICON-DIV!
 	const [display, setDisplay] = useRecoilState(displayStateAtom);
-	const [isOpen , setIsOpen] = useState(false);
+	const [isOpen, setIsOpen] = useState(false);
 
 
 	// FUNCTION FOR SHOW/NO-SHOW MODAL! (WILL MOVE THIS TO UTILS!)
 	const toggleModal = () => {
 		setIsOpen(!isOpen); // TOGGLING THE STATE!
-	}
+	};
 
 	return (
 		<>
-			
-		   {/* SHOW MODAL IF NEEDED! */}
+			{/* SHOW MODAL IF NEEDED! */}
 			<Modal
 				showModal={isOpen}
-				header="Create New User" 
-				body={<UserModalBody closeModal={toggleModal}/>}
+				header={
+					// HEADING OF MODAL BASED ON CURRENT DISPLAY STATE!
+					display.display === "USER" ? "Create New User" : "Create New Role"
+				}
+				body={
+					// BODY OF MODAL BASED ON CURRENT DISPLAY STATE!
+					display.display === "USER" ? (
+						<UserModalBody closeModal={toggleModal} />
+					) : (
+						<RoleModalBody closeModal={toggleModal} />
+					)
+				}
 			/>
-
 
 			<div className="w-full max-w-[3rem] mx-auto h-full flex">
 				<Card>
@@ -45,7 +53,7 @@ export default function SidebarMain() {
 						{/* TO ADD USERS/ROLES! */}
 						<div className="">
 							<IconComponent
-							    isClickable
+								isClickable={display.display === 'USER' || display.display === 'ROLE'}
 								onClick={toggleModal}
 								aside
 								icon={
@@ -91,7 +99,6 @@ export default function SidebarMain() {
 						</div>
 
 						{/* WILL SHOW MORE ICONS FOR ROLES SIGNED/UNSIGNED ON RIGHT-SIDE! */}
-						
 
 						{/* DEVELOPER INFO! */}
 						<div className="">
@@ -109,6 +116,8 @@ export default function SidebarMain() {
 								}
 							/>
 						</div>
+
+						
 					</div>
 				</Card>
 			</div>

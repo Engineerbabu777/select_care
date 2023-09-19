@@ -1,4 +1,4 @@
-import Card from "@/components/Card";
+import Card from "@/components/shared/Card";
 import { uniqueUsernames } from "@/constants/data";
 
 export default function UserMain() {

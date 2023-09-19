@@ -1,4 +1,4 @@
-
+'use client';
 
 type Props = {
 	showModal: Boolean; // BOOLEAN!
@@ -7,6 +7,9 @@ type Props = {
 };
 
 export default function Modal({ showModal, header, body }: Props) {
+
+
+
 	return (
 		<>
 			{showModal && (

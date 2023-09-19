@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-var Card_1 = require("@/components/Card");
+var Card_1 = require("@/components/shared/Card");
 var data_1 = require("@/constants/data");
 function UserMain() {
     return (React.createElement(React.Fragment, null,

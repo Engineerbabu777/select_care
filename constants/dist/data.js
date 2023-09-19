@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.uniqueUsernames = void 0;
+exports.roles = exports.uniqueUsernames = void 0;
 exports.uniqueUsernames = [
     { username: 'user1' },
     { username: 'user2' },
@@ -32,4 +32,36 @@ exports.uniqueUsernames = [
     { username: 'user28' },
     { username: 'user29' },
     { username: 'user30' },
+];
+exports.roles = [
+    { roleName: 'Role1', active: true },
+    { roleName: 'Role2', active: false },
+    { roleName: 'Role3', active: true },
+    { roleName: 'Role4', active: false },
+    { roleName: 'Role5', active: true },
+    { roleName: 'Role6', active: false },
+    { roleName: 'Role7', active: true },
+    { roleName: 'Role8', active: false },
+    { roleName: 'Role9', active: true },
+    { roleName: 'Role10', active: false },
+    { roleName: 'Role11', active: true },
+    { roleName: 'Role12', active: false },
+    { roleName: 'Role13', active: true },
+    { roleName: 'Role14', active: false },
+    { roleName: 'Role15', active: true },
+    { roleName: 'Role16', active: false },
+    { roleName: 'Role17', active: true },
+    { roleName: 'Role18', active: false },
+    { roleName: 'Role19', active: true },
+    { roleName: 'Role20', active: false },
+    { roleName: 'Role21', active: true },
+    { roleName: 'Role22', active: false },
+    { roleName: 'Role23', active: true },
+    { roleName: 'Role24', active: false },
+    { roleName: 'Role25', active: true },
+    { roleName: 'Role26', active: false },
+    { roleName: 'Role27', active: true },
+    { roleName: 'Role28', active: false },
+    { roleName: 'Role29', active: true },
+    { roleName: 'Role30', active: false },
 ];

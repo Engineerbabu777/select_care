@@ -1,7 +1,7 @@
 "use strict";
 exports.__esModule = true;
 var icons_1 = require("@/icons/icons");
-var IconComponent_1 = require("../IconComponent");
+var IconComponent_1 = require("../shared/IconComponent");
 function RightSide(_a) {
     return (React.createElement(React.Fragment, null,
         React.createElement("div", { className: "flex gap-2 items-center" },
