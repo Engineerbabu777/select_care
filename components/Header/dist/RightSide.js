@@ -1,3 +1,4 @@
+"use client";
 "use strict";
 exports.__esModule = true;
 var icons_1 = require("@/icons/icons");

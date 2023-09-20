@@ -1,3 +1,4 @@
+"use client";
 "use strict";
 exports.__esModule = true;
 var image_1 = require("next/image");

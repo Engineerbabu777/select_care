@@ -1,4 +1,3 @@
-
 import CloseButton from "@/components/shared/CloseButton";
 import Input from "@/components/shared/Input";
 import SaveButton from "@/components/shared/SaveButton";
@@ -14,20 +13,23 @@ type Props = {
 
 export default function RoleModalBody({ closeModal }: Props) {
 	// CUSTOM ROLE HOOK!
-	const { createNewRole } = useRole();
+	const { createNewRole, getRoles } = useRole();
 
 	// STATES!
 	const [role, setRole] = useState({
 		title: "",
 		description: "",
 		isActive: true,
-    });
+	});
 
-    const onSubmit = async() => {
-        const data = await createNewRole(role);
-        alert(data?.error,data?.success);
-    }
-    
+	const onSubmit = async () => {
+		const data = await createNewRole(role); // CALLING THE FUNCTION TO CREATE NEW ROLE!
+		setRole({ title: "", description: "", isActive: true }); // RESET STATE!
+		closeModal(); // CLOSE THE MODAL!
+
+		// INSTEAD OF WAITING FOR DATA TO COME WE WILL UPDATE THE STATE DIRECTLY FROM OUR ROLE STATE
+		//(IMPROVING UI INTERFACE FOR BETTER EXPERIENCE USER WON'T WAIT MUCH WAIT)!
+	};
 
 	return (
 		<div className="flex flex-col mx-2 my-4 gap-4">
@@ -94,9 +96,7 @@ export default function RoleModalBody({ closeModal }: Props) {
 			<div className="flex items-center w-full mt-6 gap-2">
 				<CloseButton onClick={closeModal} />
 				{/* SUBMIT BUTTON! */}
-				<SaveButton
-                    onClick={onSubmit}
-				/>
+				<SaveButton onClick={onSubmit} />
 			</div>
 		</div>
 	);

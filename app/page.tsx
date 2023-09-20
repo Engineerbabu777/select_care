@@ -6,6 +6,7 @@ import SidebarMain from "@/components/Sidebar/SidebarMain";
 import { displayStateAtom } from "@/recoil/display-state";
 import Main from "@/components/Main/Main";
 import {RecoilRoot,useRecoilState} from 'recoil';
+import MainRight from "@/components/MainRight/MainRight";
 
 export default function Home() {
 
@@ -24,7 +25,7 @@ export default function Home() {
 				 <Main />
 
 				{/* CHILD-2 OF HOME-LAYOUT!  */}
-				<div>3</div>
+				<MainRight />
 
 			</HomeLayout>
 		</RecoilRoot>

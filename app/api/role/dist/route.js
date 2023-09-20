@@ -36,31 +36,76 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.POST = void 0;
+exports.PUT = exports.DELETE = exports.GET = exports.POST = void 0;
 var mongooseConnect_1 = require("@/database/mongooseConnect");
 var role_model_1 = require("@/models/role.model");
 var server_1 = require("next/server");
 // HERE IN THIS FUNCTION WE WILL BE HANDLE POST REQUEST POST REQUEST!
 function POST(request) {
     return __awaiter(this, void 0, void 0, function () {
-        var body, title, description, isActive, newDoc;
+        var body, title, description, isActive, newDoc, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, request.json()];
                 case 1:
                     body = _a.sent();
                     title = body.title, description = body.description, isActive = body.isActive;
-                    // WILL PUT THINGS IN TRY CATCH LATER!
+                    _a.label = 2;
+                case 2:
+                    _a.trys.push([2, 4, , 5]);
                     // SAVING DATA IN OUR DATABASE!
                     mongooseConnect_1.databaseConnect();
                     return [4 /*yield*/, role_model_1.roleModel.create({
-                            title: title, description: description, isActive: isActive
+                            title: title,
+                            description: description,
+                            isActive: isActive
                         })];
-                case 2:
+                case 3:
                     newDoc = _a.sent();
                     return [2 /*return*/, server_1.NextResponse.json({ success: true, data: newDoc })];
+                case 4:
+                    err_1 = _a.sent();
+                    return [2 /*return*/, server_1.NextResponse.json({ success: false, error: err_1.message })];
+                case 5: return [2 /*return*/];
             }
         });
     });
 }
 exports.POST = POST;
+// FUNCTION MAKING GET REQUEST!
+function GET(request) {
+    return __awaiter(this, void 0, void 0, function () {
+        var roles, err_2;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    mongooseConnect_1.databaseConnect();
+                    return [4 /*yield*/, role_model_1.roleModel.find({})];
+                case 1:
+                    roles = _a.sent();
+                    console.log('SERVER IS SAYING HELLO!');
+                    return [2 /*return*/, server_1.NextResponse.json({ success: true, roles: roles })];
+                case 2:
+                    err_2 = _a.sent();
+                    return [2 /*return*/, server_1.NextResponse.json({ success: false, error: err_2.message })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.GET = GET;
+// DELETE REQUEST!
+function DELETE(request) {
+    return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+        return [2 /*return*/];
+    }); });
+}
+exports.DELETE = DELETE;
+// PUT REQUEST!
+function PUT(request) {
+    return __awaiter(this, void 0, void 0, function () { return __generator(this, function (_a) {
+        return [2 /*return*/];
+    }); });
+}
+exports.PUT = PUT;

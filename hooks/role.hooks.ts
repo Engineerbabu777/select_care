@@ -1,51 +1,80 @@
-
-
 import { validateRoleData } from "@/utils/role/dataValidations";
+import { roleState } from "@/recoil/roleState";
+import { useRecoilState } from "recoil";
 
 
 export default function useRole() {
+	// REQUIRED STATES!
+	const [role, setRole] = useRecoilState(roleState);
 
-    // CREATE NEW ROLE!
-    const createNewRole = async(role:any) => {
+	// GET ALL ROLES!
+	const getRoles = async () => {
+		setRole({ ...role, loadingRoles: true });
 
-        try {
-        
-            // VALIDATE DATA!
-            const validator = validateRoleData(role.title, role.description, role.isActive);
+		// MAKE A GET REQUEST! (PUT IN TRY CATCH AT LAST!)!
+		fetch("/api/role")
+			.then((response: any) => {
+				response.json().then((data: any) => {
+					setRole({
+						roles: data?.roles,
+						totalNumberOfRoles: data?.roles?.length,
+						loadingRoles: false,
+					});
+				});
+			})
+			.catch((err: any) => {
+				setRole({ ...role, loadingRoles: false });
+				// WILL WRITE HERE LATER  MORE !!!
+			});
 
-            
-            if (validator) {
-                const data = await fetch('/api/role', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'accept': 'application/json',
-                    },
-                    body: JSON.stringify(role),
-                });
+		// VALIDATE IF ERROR EXITS OR NOT !!
+	};
 
-                console.log(data);
-                return { success: true};
-            }
+	// useEffect(() => {
+	// 	getRoles();
+	// }, []);
 
-        } catch (err: any) {
-            console.log("HELLO FROM USE ROLE HOOK!");
-            return { error: err.message };
-        }
-        
-    }
+	// CREATE NEW ROLE!
+	const createNewRole = async (role: any) => {
+		try {
+			// VALIDATE DATA!
+			const validator = validateRoleData(
+				role.title,
+				role.description,
+				role.isActive
+			);
 
-    // DELETE ANY ROLE!
-    const deleteRole = () => { }
+			if (validator) {
+				const data = await fetch("/api/role", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json",
+						accept: "application/json",
+					},
+					body: JSON.stringify(role),
+				});
 
-    // EDIT ANY ROLE!
-    const editRole = () => { }
+				const newDocs = await getRoles();
 
-    // GET ALL ROLES!
-    const getRoles = () => { }
+				console.log(data, newDocs);
+				return { success: true };
+			}
+		} catch (err: any) {
+			console.log("HELLO FROM USE ROLE HOOK!");
+			return { error: err.message };
+		}
+	};
 
+	// DELETE ANY ROLE!
+	const deleteRole = () => {};
 
+	// EDIT ANY ROLE!
+	const editRole = () => {};
 
-
-    return {createNewRole, deleteRole, editRole, getRoles}
+	return {
+		createNewRole,
+		deleteRole,
+		editRole,
+		getRoles,
+	};
 }

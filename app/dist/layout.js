@@ -4,6 +4,7 @@ exports.metadata = void 0;
 var HeaderMain_1 = require("@/components/Header/HeaderMain");
 require("./globals.css");
 var google_1 = require("next/font/google");
+var react_hot_toast_1 = require("react-hot-toast");
 var inter = google_1.Inter({ subsets: ['latin'] });
 exports.metadata = {
     title: 'Create Next App',
@@ -13,6 +14,7 @@ function RootLayout(_a) {
     var children = _a.children;
     return (React.createElement("html", { lang: "en" },
         React.createElement("body", { className: "inter.className bg-gray-100" },
+            React.createElement(react_hot_toast_1.Toaster, null),
             React.createElement(HeaderMain_1["default"], null),
             children)));
 }

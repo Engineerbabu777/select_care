@@ -59,13 +59,13 @@ function RoleModalBody(_a) {
     var _this = this;
     var closeModal = _a.closeModal;
     // CUSTOM ROLE HOOK!
-    var createNewRole = role_hooks_1["default"]().createNewRole;
+    var _b = role_hooks_1["default"](), createNewRole = _b.createNewRole, getRoles = _b.getRoles;
     // STATES!
-    var _b = react_1.useState({
+    var _c = react_1.useState({
         title: "",
         description: "",
         isActive: true
-    }), role = _b[0], setRole = _b[1];
+    }), role = _c[0], setRole = _c[1];
     var onSubmit = function () { return __awaiter(_this, void 0, void 0, function () {
         var data;
         return __generator(this, function (_a) {
@@ -73,7 +73,8 @@ function RoleModalBody(_a) {
                 case 0: return [4 /*yield*/, createNewRole(role)];
                 case 1:
                     data = _a.sent();
-                    alert(data === null || data === void 0 ? void 0 : data.error, data === null || data === void 0 ? void 0 : data.success);
+                    setRole({ title: "", description: "", isActive: true }); // RESET STATE!
+                    closeModal(); // CLOSE THE MODAL!
                     return [2 /*return*/];
             }
         });

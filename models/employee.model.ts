@@ -1,8 +1,9 @@
 import mongoose from "mongoose";
+import { roleModel } from "./role.model";
 
 const employeeSchema = new mongoose.Schema(
 	{
-		fistName: {
+		firstName: {
 			type: String,
 			minLength: 3,
 			required: true,
@@ -19,7 +20,9 @@ const employeeSchema = new mongoose.Schema(
 			unique: true,
 		},
 		role: {
-			type: String,
+			type: mongoose.Types.ObjectId,
+			default:'no-role',
+			ref: 'role',
 		},
 	},
 	{
@@ -27,4 +30,4 @@ const employeeSchema = new mongoose.Schema(
 	}
 );
 
-export const employeeModel = mongoose.model("employee", employeeSchema);
+export const employeeModel = mongoose?.models?.employee || mongoose.model("employee", employeeSchema);

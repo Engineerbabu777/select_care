@@ -4,7 +4,9 @@ import Card from "../shared/Card";
 import IconComponent from "../shared/IconComponent";
 import {
 	AiOutlineLine,
+	MdCompost,
 	FaIdCardClip,
+	MdOutlineCompare,
 	IoIosAddCircle,
 	MdEngineering,
 	RiGroup2Fill,
@@ -17,11 +19,9 @@ import UserModalBody from "../Modals/User/Body";
 import RoleModalBody from "../Modals/Role/Body";
 
 export default function SidebarMain() {
-
 	// WILL REMOVE DIVISIONS AT END AS WELL CREATE COMPONENT FOR ICON-DIV!
 	const [display, setDisplay] = useRecoilState(displayStateAtom);
 	const [isOpen, setIsOpen] = useState(false);
-
 
 	// FUNCTION FOR SHOW/NO-SHOW MODAL! (WILL MOVE THIS TO UTILS!)
 	const toggleModal = () => {
@@ -53,7 +53,9 @@ export default function SidebarMain() {
 						{/* TO ADD USERS/ROLES! */}
 						<div className="">
 							<IconComponent
-								isClickable={display.display === 'USER' || display.display === 'ROLE'}
+								isClickable={
+									display.display === "USER" || display.display === "ROLE"
+								}
 								onClick={toggleModal}
 								aside
 								icon={
@@ -68,13 +70,15 @@ export default function SidebarMain() {
 						<div className="-mb-1">
 							<IconComponent
 								isClickable
-								onClick={() => setDisplay({ ...display, display: "USER" })}
+								onClick={() => setDisplay({ right: "", display: "USER" })}
 								aside
 								icon={
 									<RiGroup2Fill
 										className={
 											"w-7 h-7 m-1.5 " +
-											(display?.display === "USER" ? "text-orange-800" : "")
+											(display?.display === "USER" && display?.right === ""
+												? "text-orange-800"
+												: "")
 										}
 									/>
 								}
@@ -85,13 +89,37 @@ export default function SidebarMain() {
 						<div className="">
 							<IconComponent
 								isClickable
-								onClick={() => setDisplay({ ...display, display: "ROLE" })}
+								onClick={() => setDisplay({ right: "", display: "ROLE" })}
 								aside
 								icon={
 									<FaIdCardClip
 										className={
 											"w-6 h-6 m-2 " +
-											(display?.display === "ROLE" ? "text-orange-800" : "")
+											(display?.display === "ROLE" && display?.right === ""
+												? "text-orange-800"
+												: "")
+										}
+									/>
+								}
+							/>
+						</div>
+
+						{/* WILL SHOW MORE ICONS FOR USER SIGNED/UNSIGNED ON RIGHT-SIDE! */}
+						<div className="">
+							<IconComponent
+								isClickable
+								onClick={() =>
+									setDisplay({ right: "SUNSUSER", display: "USER" })
+								}
+								aside
+								icon={
+									<MdCompost
+										className={
+											"w-6 h-6 m-2 " +
+											(display?.display === "USER" &&
+											display?.right === "SUNSUSER"
+												? "text-orange-800"
+												: "")
 										}
 									/>
 								}
@@ -99,12 +127,32 @@ export default function SidebarMain() {
 						</div>
 
 						{/* WILL SHOW MORE ICONS FOR ROLES SIGNED/UNSIGNED ON RIGHT-SIDE! */}
+						<div className="">
+							<IconComponent
+								isClickable
+								onClick={() =>
+									setDisplay({ right: "SUNSROLE", display: "ROLE" })
+								}
+								aside
+								icon={
+									<MdOutlineCompare
+										className={
+											"w-6 h-6 m-2 " +
+											(display?.display === "ROLE" &&
+											display?.right === "SUNSROLE"
+												? "text-orange-800"
+												: "")
+										}
+									/>
+								}
+							/>
+						</div>
 
 						{/* DEVELOPER INFO! */}
 						<div className="">
 							<IconComponent
 								isClickable
-								onClick={() => setDisplay({ ...display, display: "DEV" })}
+								onClick={() => setDisplay({ right: "", display: "DEV" })}
 								aside
 								icon={
 									<MdEngineering
@@ -116,8 +164,6 @@ export default function SidebarMain() {
 								}
 							/>
 						</div>
-
-						
 					</div>
 				</Card>
 			</div>

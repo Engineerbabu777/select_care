@@ -2,7 +2,7 @@
 
 
 
-import {MdNotifications,MdOutlineApps,MdEngineering,MdClose} from 'react-icons/md';
+import { MdNotifications, MdOutlineApps, MdEngineering, MdClose, MdCompost, MdOutlineCompare } from 'react-icons/md';
 import {PiChatsBold} from 'react-icons/pi';
 import {GrApps} from 'react-icons/gr';
 import {BiSolidUserCircle} from 'react-icons/bi';
@@ -17,5 +17,5 @@ import { CgUnavailable } from 'react-icons/cg';
 
 // EXPORTING ICONS TO TO USE IN MULTIPLE COMPONENTS!
 export {
-    MdNotifications, PiChatsBold, GrApps, BiSolidUserCircle, AiFillCheckCircle, 
+    MdNotifications, PiChatsBold, GrApps, BiSolidUserCircle, AiFillCheckCircle, MdCompost,MdOutlineCompare,
     MdOutlineApps, IoIosAddCircle, RiGroup2Fill, FaIdCardClip, AiOutlineLine, MdEngineering, MdClose, FaSave, CgUnavailable };

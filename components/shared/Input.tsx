@@ -1,12 +1,12 @@
-
+"use client";
 
 type Props = {
 	label?: String;
 	name?: String;
 	placeholder?: String;
 	type?: String;
-    require?: Boolean;
-    onChange?: unknown; // WILL CHANGE THIS LATER!
+	require?: Boolean;
+	onChange?: unknown; // WILL CHANGE THIS LATER!
 };
 
 export default function Input({
@@ -14,11 +14,9 @@ export default function Input({
 	name,
 	placeholder,
 	type,
-    require = false,
-    onChange,
+	require,
+	onChange,
 }: Props) {
-
-
 	return (
 		<>
 			{/* LABEL! */}
@@ -28,9 +26,9 @@ export default function Input({
 			>
 				{label}
 			</label>
-			
+
 			{/* INPUT! */}
-			<input 
+			<input
 				onChange={onChange}
 				required={require}
 				id={name}

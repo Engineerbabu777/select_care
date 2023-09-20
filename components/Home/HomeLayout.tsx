@@ -1,7 +1,8 @@
+'use client';
 import React from "react";
 
 type Props = {
-	children: React.ReactNode;
+	children: any;
 };
 
 export default function HomeLayout({ children }: Props) {
@@ -19,7 +20,7 @@ export default function HomeLayout({ children }: Props) {
 						{children[1]}
 					</section>
 
-					<section className="hidden lg:block lg:flex-1  h-full">
+					<section className="hidden lg:block lg:flex-1 mr-4  h-full">
 						{children[2]}
 					</section>
 				</div>

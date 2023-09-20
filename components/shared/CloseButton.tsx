@@ -1,3 +1,5 @@
+"use client";
+
 import { MdClose } from "@/icons/icons";
 
 type Props = {
@@ -14,8 +16,8 @@ export default function CloseButton({ onClick }: Props) {
 			>
 				{/* ICON! */}
 				<MdClose className="w-4 h-4 " />
-                {/* TEXT! */}
-                <p className="text-md font-bold ">Close</p>
+				{/* TEXT! */}
+				<p className="text-md font-bold ">Close</p>
 			</button>
 		</>
 	);

@@ -1,4 +1,15 @@
 "use strict";
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -37,35 +48,67 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 exports.__esModule = true;
 var dataValidations_1 = require("@/utils/role/dataValidations");
+var roleState_1 = require("@/recoil/roleState");
+var recoil_1 = require("recoil");
 function useRole() {
     var _this = this;
+    // REQUIRED STATES!
+    var _a = recoil_1.useRecoilState(roleState_1.roleState), role = _a[0], setRole = _a[1];
+    // GET ALL ROLES!
+    var getRoles = function () { return __awaiter(_this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            setRole(__assign(__assign({}, role), { loadingRoles: true }));
+            // MAKE A GET REQUEST! (PUT IN TRY CATCH AT LAST!)!
+            fetch("/api/role")
+                .then(function (response) {
+                response.json().then(function (data) {
+                    var _a;
+                    setRole({
+                        roles: data === null || data === void 0 ? void 0 : data.roles,
+                        totalNumberOfRoles: (_a = data === null || data === void 0 ? void 0 : data.roles) === null || _a === void 0 ? void 0 : _a.length,
+                        loadingRoles: false
+                    });
+                });
+            })["catch"](function (err) {
+                setRole(__assign(__assign({}, role), { loadingRoles: false }));
+                // WILL WRITE HERE LATER  MORE !!!
+            });
+            return [2 /*return*/];
+        });
+    }); };
+    // useEffect(() => {
+    // 	getRoles();
+    // }, []);
     // CREATE NEW ROLE!
     var createNewRole = function (role) { return __awaiter(_this, void 0, void 0, function () {
-        var validator, data, err_1;
+        var validator, data, newDocs, err_1;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
-                    _a.trys.push([0, 3, , 4]);
+                    _a.trys.push([0, 4, , 5]);
                     validator = dataValidations_1.validateRoleData(role.title, role.description, role.isActive);
-                    if (!validator) return [3 /*break*/, 2];
-                    return [4 /*yield*/, fetch('/api/role', {
-                            method: 'POST',
+                    if (!validator) return [3 /*break*/, 3];
+                    return [4 /*yield*/, fetch("/api/role", {
+                            method: "POST",
                             headers: {
-                                'Content-Type': 'application/json',
-                                'accept': 'application/json'
+                                "Content-Type": "application/json",
+                                accept: "application/json"
                             },
                             body: JSON.stringify(role)
                         })];
                 case 1:
                     data = _a.sent();
-                    console.log(data);
+                    return [4 /*yield*/, getRoles()];
+                case 2:
+                    newDocs = _a.sent();
+                    console.log(data, newDocs);
                     return [2 /*return*/, { success: true }];
-                case 2: return [3 /*break*/, 4];
-                case 3:
+                case 3: return [3 /*break*/, 5];
+                case 4:
                     err_1 = _a.sent();
                     console.log("HELLO FROM USE ROLE HOOK!");
                     return [2 /*return*/, { error: err_1.message }];
-                case 4: return [2 /*return*/];
+                case 5: return [2 /*return*/];
             }
         });
     }); };
@@ -73,8 +116,11 @@ function useRole() {
     var deleteRole = function () { };
     // EDIT ANY ROLE!
     var editRole = function () { };
-    // GET ALL ROLES!
-    var getRoles = function () { };
-    return { createNewRole: createNewRole, deleteRole: deleteRole, editRole: editRole, getRoles: getRoles };
+    return {
+        createNewRole: createNewRole,
+        deleteRole: deleteRole,
+        editRole: editRole,
+        getRoles: getRoles
+    };
 }
 exports["default"] = useRole;
