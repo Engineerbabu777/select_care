@@ -10,7 +10,7 @@ export default function HomeLayout({ children }: Props) {
 
 	return (
 		<>
-			<main className="flex gap-2 w-full h-[100vh] mt-14">
+			<main className="flex gap-2 w-full h-full lg:h-[calc(100vh-55px)] mt-14">
 				<section className="hidden sm:block w-[5vw] md:w-[6vw] h-full ml-2 sm:m-0 ">
 					{children[0]}
 				</section>

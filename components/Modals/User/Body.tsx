@@ -23,12 +23,12 @@ export default function UserModalBody({ closeModal }: Props) {
 		firstName: string;
 		lastName: string;
 		email: string;
-		role: string | undefined;
+		role: string | undefined | null;
 	}>({
 		firstName: "",
 		lastName: "",
 		email: "",
-		role: "",
+		role: null,
 	});
 
 	// WILL CHANGE ANY TYPES LATER!

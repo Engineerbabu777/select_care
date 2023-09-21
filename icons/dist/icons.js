@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.CgUnavailable = exports.FaSave = exports.MdClose = exports.MdEngineering = exports.AiOutlineLine = exports.FaIdCardClip = exports.RiGroup2Fill = exports.IoIosAddCircle = exports.MdOutlineApps = exports.MdOutlineCompare = exports.MdCompost = exports.AiFillCheckCircle = exports.BiSolidUserCircle = exports.GrApps = exports.PiChatsBold = exports.MdNotifications = void 0;
+exports.CgUnavailable = exports.FaSave = exports.MdClose = exports.MdEngineering = exports.AiOutlineLine = exports.FaIdCardClip = exports.RiGroup2Fill = exports.IoIosAddCircle = exports.MdOutlineApps = exports.BiDotsVertical = exports.MdOutlineCompare = exports.MdCompost = exports.AiFillCheckCircle = exports.BiSolidUserCircle = exports.GrApps = exports.PiChatsBold = exports.MdNotifications = void 0;
 var md_1 = require("react-icons/md");
 exports.MdNotifications = md_1.MdNotifications;
 exports.MdOutlineApps = md_1.MdOutlineApps;
@@ -14,6 +14,7 @@ var gr_1 = require("react-icons/gr");
 exports.GrApps = gr_1.GrApps;
 var bi_1 = require("react-icons/bi");
 exports.BiSolidUserCircle = bi_1.BiSolidUserCircle;
+exports.BiDotsVertical = bi_1.BiDotsVertical;
 var io_1 = require("react-icons/io");
 exports.IoIosAddCircle = io_1.IoIosAddCircle;
 var ri_1 = require("react-icons/ri");

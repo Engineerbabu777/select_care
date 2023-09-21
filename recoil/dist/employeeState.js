@@ -7,7 +7,9 @@ var initialState = {
     loadingEmployees: false,
     totalNumberOfEmployee: 0,
     employees: [],
-    selectedOne: null
+    selectedOne: null,
+    assigned: [],
+    nonAssigned: []
 };
 // EXPORTING STATE!
 exports.employeeState = recoil_1.atom({

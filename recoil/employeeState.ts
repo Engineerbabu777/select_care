@@ -6,6 +6,8 @@ interface EmployeeStateInterface {
 	totalNumberOfEmployee: Number;
 	employees: any;
 	selectedOne: any;
+	assigned:any;
+	nonAssigned: any;
 }
 
 // INITIAL STATE!
@@ -14,6 +16,8 @@ const initialState: EmployeeStateInterface = {
 	totalNumberOfEmployee: 0,
 	employees: [],
 	selectedOne: null,
+	assigned: [],
+	nonAssigned: [],
 };
 
 // EXPORTING STATE!

@@ -21,7 +21,7 @@ const employeeSchema = new mongoose.Schema(
 		},
 		role: {
 			type: mongoose.Types.ObjectId,
-			default:'no-role',
+			default:null,
 			ref: 'role',
 		},
 	},

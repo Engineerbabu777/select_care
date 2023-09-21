@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { roleState } from "@/recoil/roleState";
 import { useRecoilState } from "recoil";
 import { PulseLoader } from "react-spinners"; //IF NEEDED WILL PUSH TO NEW FILE!
+import Heading from "@/components/shared/Heading";
 
 export default function RoleMain() {
 	const { getRoles } = useRole();
@@ -23,9 +24,7 @@ export default function RoleMain() {
 				<Card>
 					<div className="h-full flex flex flex-col">
 						{/* HEADER */}
-						<div className="border-b px-2 py-3 border-gray-300 text-2xl text-semibold text-gray-700 flex">
-							<h1>Manage Roles</h1>
-						</div>
+						<Heading heading={"Manage Roles"}/>
 
 						{/* LOADING STATE IF GETTING DATA! */}
 						{role.loadingRoles && (
@@ -49,7 +48,6 @@ export default function RoleMain() {
 												key={ind}
 												className="text-md text-[#3abff8] transition-all duration-300 hover:text-blue-600 cursor-pointer hover:bg-gray-200 border-b border-gray-300 py-1 px-2"
 											>
-												{console.log(r)}
 												<h1 className="hover:underline">{r?.title}</h1>
 											</div>
 										))}

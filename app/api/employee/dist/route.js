@@ -36,7 +36,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-exports.GET = exports.POST = void 0;
+exports.PUT = exports.DELETE = exports.GET = exports.POST = void 0;
 var mongooseConnect_1 = require("@/database/mongooseConnect");
 var employee_model_1 = require("@/models/employee.model");
 var role_model_1 = require("@/models/role.model");
@@ -62,7 +62,7 @@ function POST(request) {
                         })];
                 case 2:
                     newDoc = _a.sent();
-                    console.log('HELLO FROM SERVER:-> ', body);
+                    // WILL HANDLE DUPLICATE EMAIL LATER!
                     return [2 /*return*/, server_1.NextResponse.json({ success: true, newDoc: newDoc })];
                 case 3:
                     err_1 = _a.sent();
@@ -74,6 +74,7 @@ function POST(request) {
     });
 }
 exports.POST = POST;
+// GET REQUEST !!
 function GET(request) {
     return __awaiter(this, void 0, void 0, function () {
         var emp, err_2;
@@ -83,7 +84,9 @@ function GET(request) {
                     _a.trys.push([0, 2, , 3]);
                     // CREATING CONNECTION WITH DATABASE!
                     mongooseConnect_1.databaseConnect();
-                    return [4 /*yield*/, employee_model_1.employeeModel.find({}).populate('role', { path: role_model_1.roleModel })];
+                    return [4 /*yield*/, employee_model_1.employeeModel
+                            .find({})
+                            .populate("role", { path: role_model_1.roleModel })];
                 case 1:
                     emp = _a.sent();
                     console.log(emp);
@@ -98,3 +101,63 @@ function GET(request) {
     });
 }
 exports.GET = GET;
+// DELETE REQUEST !!
+function DELETE(request) {
+    return __awaiter(this, void 0, void 0, function () {
+        var url, id, result, err_3;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 2, , 3]);
+                    url = new URL(request.url);
+                    id = url.searchParams.get("id");
+                    return [4 /*yield*/, employee_model_1.employeeModel.findByIdAndDelete(id)];
+                case 1:
+                    result = _a.sent();
+                    // DELETION FROM DATABASE!
+                    return [2 /*return*/, server_1.NextResponse.json({
+                            success: true,
+                            message: "Deletion Successful!",
+                            result: result
+                        })];
+                case 2:
+                    err_3 = _a.sent();
+                    return [2 /*return*/, server_1.NextResponse.json({ error: true, message: "Deletion Failed!" })];
+                case 3: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.DELETE = DELETE;
+// PUT REQUEST!
+function PUT(request) {
+    return __awaiter(this, void 0, void 0, function () {
+        var body, _id, role, firstName, lastName, email, updatedDoc, error_1;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    _a.trys.push([0, 3, , 4]);
+                    return [4 /*yield*/, request.json()];
+                case 1:
+                    body = _a.sent();
+                    _id = body._id, role = body.role, firstName = body.firstName, lastName = body.lastName, email = body.email;
+                    console.log("ROLE ID-> ", role);
+                    return [4 /*yield*/, employee_model_1.employeeModel.findByIdAndUpdate(_id, {
+                            role: role,
+                            firstName: firstName,
+                            lastName: lastName,
+                            email: email
+                        })];
+                case 2:
+                    updatedDoc = _a.sent();
+                    return [2 /*return*/, server_1.NextResponse.json({ success: true, updatedDoc: updatedDoc })];
+                case 3:
+                    error_1 = _a.sent();
+                    server_1.NextResponse.json({ error: true, message: error_1 === null || error_1 === void 0 ? void 0 : error_1.message });
+                    return [3 /*break*/, 4];
+                case 4: return [2 /*return*/];
+            }
+        });
+    });
+}
+exports.PUT = PUT;

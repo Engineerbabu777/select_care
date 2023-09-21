@@ -57,7 +57,7 @@ function UserModalBody(_a) {
         firstName: "",
         lastName: "",
         email: "",
-        role: ""
+        role: null
     }), user = _f[0], setUser = _f[1];
     // WILL CHANGE ANY TYPES LATER!
     // SUBMIT HANDLER! (WILL PUT THIS SEP.....)

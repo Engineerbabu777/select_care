@@ -8,6 +8,7 @@ import { employeeState } from "@/recoil/employeeState";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { PulseLoader } from "react-spinners";
+import Heading from "@/components/shared/Heading";
 
 export default function UserMain() {
 	const { getRoles } = useRole();
@@ -29,12 +30,10 @@ export default function UserMain() {
 				<Card>
 					<div className="h-full flex flex-col ">
 						{/* HEADER */}
-						<div className="border-b px-2 py-3 border-gray-300 text-2xl text-semibold text-gray-700  flex">
-							<h1 className="">Manage Users</h1>
-						</div>
+						<Heading heading={"Manage Employees"} />
 
 						{/* LOADING STATE IF GETTING DATA! */}
-						{employee.loadingEmployees && (
+						{employee?.loadingEmployees && (
 							<div className="flex h-full items-center justify-center border-gray-300 bg-gray-50 m-2 ">
 								<div className="flex gap-2 items-center">
 									<span className="text-[#E55604] font-semibold text-lg">
@@ -52,6 +51,9 @@ export default function UserMain() {
 									{employee?.employees?.length > 0 &&
 										employee?.employees.map((user) => (
 											<div
+												onClick={() =>
+													setEmployee({ ...employee, selectedOne: user })
+												}
 												key={user}
 												className="text-md text-[#3abff8] transition-all duration-300 hover:text-blue-600 cursor-pointer hover:bg-gray-200 border-b border-gray-300 py-1 px-2"
 											>

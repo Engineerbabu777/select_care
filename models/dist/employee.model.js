@@ -22,7 +22,7 @@ var employeeSchema = new mongoose_1["default"].Schema({
     },
     role: {
         type: mongoose_1["default"].Types.ObjectId,
-        "default": 'no-role',
+        "default": null,
         ref: 'role'
     }
 }, {
