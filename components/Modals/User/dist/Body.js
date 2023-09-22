@@ -1,3 +1,4 @@
+'use client';
 "use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
@@ -94,9 +95,14 @@ function UserModalBody(_a) {
                 react_1["default"].createElement("label", { className: "text-md font-semibold text-gray-500", htmlFor: "role" }, "Choose Current Role"),
                 react_1["default"].createElement("select", { onChange: function (e) { return onChangeHandler_1.onChangeHandler(e, setUser, user); }, name: "role", id: "role", className: "cursor-pointer overflow-auto text-blue-500 font-medium text-sm rounded-md shadow-sm bg-gray-200  hover:bg-gray-300 outline-none focus:outline-none px-3 py-1 focus:ring-blue-500 focus:ring-2" },
                     react_1["default"].createElement("option", { value: "", className: "bg-gray-100 hover:bg-400 text-black hover:text-gray-700" }, "No-Role"),
-                    (role === null || role === void 0 ? void 0 : role.roles.length) > 0 && ((_b = role === null || role === void 0 ? void 0 : role.roles) === null || _b === void 0 ? void 0 : _b.map(function (r) { return (react_1["default"].createElement(react_1["default"].Fragment, null,
-                        react_1["default"].createElement("option", { value: r === null || r === void 0 ? void 0 : r._id, className: " bg-gray-100 hover:bg-400 text-black hover:text-gray-700" }, r === null || r === void 0 ? void 0 : r.title))); }))))),
-        react_1["default"].createElement("div", { className: "flex items-center w-full mt-6 gap-2" },
+                    (role === null || role === void 0 ? void 0 : role.roles.length) > 0 && ((_b = role === null || role === void 0 ? void 0 : role.roles) === null || _b === void 0 ? void 0 : _b.map(function (r) {
+                        if ((r === null || r === void 0 ? void 0 : r.isActive) === 'false')
+                            return; // THAT MEANS THE ROLE IS UNAVAILABLE!
+                        // ELSE RETURN THE AVAILABLE ROLES!
+                        return (react_1["default"].createElement(react_1["default"].Fragment, null,
+                            react_1["default"].createElement("option", { value: r === null || r === void 0 ? void 0 : r._id, className: " bg-gray-100 hover:bg-400 text-black hover:text-gray-700" }, r === null || r === void 0 ? void 0 : r.title)));
+                    }))))),
+        react_1["default"].createElement("div", { className: "flex items-center justify-between w-full mt-6 gap-2" },
             react_1["default"].createElement(CloseButton_1["default"], { onClick: closeModal }),
             react_1["default"].createElement(SaveButton_1["default"], { loading: loading, setLoading: setLoading, onClick: function () {
                     onSubmitHandler();

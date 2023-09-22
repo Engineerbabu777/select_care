@@ -1,3 +1,5 @@
+"use client";
+
 import { useRecoilState } from "recoil";
 import Card from "../shared/Card";
 import { displayStateAtom } from "@/recoil/display-state";
@@ -36,10 +38,7 @@ export default function MainRight() {
 							</>
 						)}
 
-						{/* CHECK IF DISPLAY-STATE IS ROLE THEN SHOW ALL ROLES WITH ASSIGNED EMPLOYEES (JUST NUMBER)! */}
-						{display?.display === "ROLE" && display?.right === "SUNSROLE" && (
-							<>SUNSROLE</>
-						)}
+						{/* CHECK IF DISPLAY-STATE IS ROLE THEN SHOW ALL ROLES WITH ASSIGNED EMPLOYEES (JUST NUMBER) (OPTIONAL)! */}
 					</div>
 				</Card>
 			</div>

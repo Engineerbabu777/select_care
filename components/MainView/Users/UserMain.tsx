@@ -1,27 +1,23 @@
 "use client";
 
 import Card from "@/components/shared/Card";
-import { uniqueUsernames } from "@/constants/data";
-import useEmployee from "@/hooks/employee.hooks";
-import useRole from "@/hooks/role.hooks";
 import { employeeState } from "@/recoil/employeeState";
 import { useEffect } from "react";
 import { useRecoilState } from "recoil";
 import { PulseLoader } from "react-spinners";
 import Heading from "@/components/shared/Heading";
+import useRole from "@/hooks/role.hooks";
+import useEmployee from "@/hooks/employee.hooks";
+import TopDetails from "@/components/shared/TopDetails";
 
 export default function UserMain() {
+	const [employee, setEmployee] = useRecoilState(employeeState);
 	const { getRoles } = useRole();
 	const { getEmployees } = useEmployee();
 
-	const [employee, setEmployee] = useRecoilState(employeeState);
-
-	useEffect(() => {
-		getEmployees();
-	}, []);
-
 	useEffect(() => {
 		getRoles();
+		getEmployees();
 	}, []);
 
 	return (
@@ -44,24 +40,34 @@ export default function UserMain() {
 							</div>
 						)}
 
-						{/* LIST OF USERS! */}
+						{/* IF EMPLOYEES LENGTH IS LESS THAN 1 THAN WILL SHOW SOME TEXT AS WELL(END!)! */}
+
+						{/* LIST OF EMPLOYEES! */}
 						{!employee.loadingEmployees && (
-							<div className="border-gray-300 bg-gray-50 overflow-auto m-2 custom-scroll">
-								<div className=" flex-1  ">
-									{employee?.employees?.length > 0 &&
-										employee?.employees.map((user) => (
-											<div
-												onClick={() =>
-													setEmployee({ ...employee, selectedOne: user })
-												}
-												key={user}
-												className="text-md text-[#3abff8] transition-all duration-300 hover:text-blue-600 cursor-pointer hover:bg-gray-200 border-b border-gray-300 py-1 px-2"
-											>
-												<h1 className="hover:underline">
-													{user.firstName} {user?.lastName}
-												</h1>
-											</div>
-										))}
+							<div className="flex flex-col overflow-hidden mb-2 mt-1 mx-2">
+								{/* TOP SMALL HEADING! */}
+								<TopDetails
+									length={employee?.totalNumberOfEmployee as number}
+									smallHeading={"Employees"}
+								/>
+								{/* TABLE TYPE DETAILS! */}
+								<div className="border-gray-300 bg-gray-50 overflow-auto custom-scroll">
+									<div className=" flex-1  ">
+										{employee?.employees?.length > 0 &&
+											employee?.employees.map((user: any) => (
+												<div
+													onClick={() =>
+														setEmployee({ ...employee, selectedOne: user })
+													}
+													key={user}
+													className="text-md text-[#3abff8] transition-all duration-300 hover:text-blue-600 cursor-pointer hover:bg-gray-200 border-b border-gray-300 py-1 px-2"
+												>
+													<h1 className="hover:underline">
+														{user.firstName} {user?.lastName}
+													</h1>
+												</div>
+											))}
+									</div>
 								</div>
 							</div>
 						)}

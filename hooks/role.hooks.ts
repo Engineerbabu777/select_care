@@ -1,7 +1,10 @@
+'use client';
+
 import { validateRoleData } from "@/utils/role/dataValidations";
 import { roleState } from "@/recoil/roleState";
 import { useRecoilState } from "recoil";
-
+import toast from "react-hot-toast";
+import { useEffect } from 'react';
 
 export default function useRole() {
 	// REQUIRED STATES!
@@ -19,6 +22,7 @@ export default function useRole() {
 						roles: data?.roles,
 						totalNumberOfRoles: data?.roles?.length,
 						loadingRoles: false,
+						selectedRole: null,
 					});
 				});
 			})
@@ -30,9 +34,6 @@ export default function useRole() {
 		// VALIDATE IF ERROR EXITS OR NOT !!
 	};
 
-	// useEffect(() => {
-	// 	getRoles();
-	// }, []);
 
 	// CREATE NEW ROLE!
 	const createNewRole = async (role: any) => {
@@ -66,10 +67,60 @@ export default function useRole() {
 	};
 
 	// DELETE ANY ROLE!
-	const deleteRole = () => {};
+	const deleteRole = (id: string) => {
+		try {
+			// DELETE FROM STATE!
+			setRole({
+				...role,
+				roles: role?.roles.filter((u: any) => u._id !== id),
+				selectedRole: null,
+			}); // THAT WILL REMOVE DELETION ID AND MAKE SELECTED NULL ON RIGHT SIDE!
+
+			// WE CAN ALSO CHECK FROM OUR STATE THAT IF ID IS AVAILABLE THEN REMOVE FROM DATABASE OTHERWISE NOT MAKE A DELETE REQUEST! (IN FUTURE!) !!
+
+
+			// OTHERWISE DELETE REQUEST!
+			fetch("/api/role?id=" + id, { method: "DELETE" }).then((response: any) =>
+				response.json().then((data: any) => console.log(data))
+			);
+
+			toast.success("DELETION SUCCESSFUL!");
+
+			// THAT MEANS EVERYTHING IS OK FETCH REFRESH DATA!
+		} catch (error: any) {
+			console.log("DELETION ERROR:-> ", error.message);
+		}
+	};
 
 	// EDIT ANY ROLE!
-	const editRole = () => {};
+	const editRole = () => {
+		const { _id, title, description, isActive } = role?.selectedRole;
+		try {
+			const validator = validateRoleData(title, description, isActive);
+
+			const body = { title, description, isActive, _id };
+
+			// EVERTING IS OK!
+			if (validator) {
+				// UPDATE DATA IN DATABASE!
+				fetch("/api/role", {
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+						accept: "application/json",
+					},
+					body: JSON.stringify(body),
+				})
+					.then((response: any) =>
+						response.json().then((data: any) => console.log(data))
+					)
+					.catch((er: any) => console.log(er?.message));
+			}
+			toast.success("EDIT SUCCESSFUL!");
+			getRoles(); // GETTING FRESH ROLES!
+			return { success: true, message: "Roles updated successfully!" };
+		} catch (err: any) {}
+	};
 
 	return {
 		createNewRole,

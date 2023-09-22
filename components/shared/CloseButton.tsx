@@ -11,7 +11,8 @@ export default function CloseButton({ onClick }: Props) {
 		<>
 			<button
 				type="button"
-				className="flex py-2 text-red-700 hover:text-white hover:bg-red-400 transition duration-300 gap-2 items-center justify-center bg-red-300 shadow-sm rounded-md w-full"
+				className="flex items-center gap-1 bg-gray-100 hover:bg-gray-300 border-blue-400 hover:text-red-500 text-blue-700
+				transition-all duration-300 rounded-full px-4 py-1"
 				onClick={onClick}
 			>
 				{/* ICON! */}

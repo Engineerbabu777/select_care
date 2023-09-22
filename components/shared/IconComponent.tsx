@@ -1,14 +1,13 @@
 "use client";
 
 import { updateState } from "@/utils/state-manage/handledisplayState";
-import { React } from "react";
 
 type Props = {
 	icon: React.ReactNode;
 	hidden?: Boolean;
 	header?: Boolean;
 	aside?: Boolean;
-	onClick?: () => void;
+	onClick?: any;
 	isClickable?: Boolean;
 };
 

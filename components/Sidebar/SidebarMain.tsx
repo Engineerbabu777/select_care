@@ -126,27 +126,6 @@ export default function SidebarMain() {
 							/>
 						</div>
 
-						{/* WILL SHOW MORE ICONS FOR ROLES SIGNED/UNSIGNED ON RIGHT-SIDE! */}
-						<div className="">
-							<IconComponent
-								isClickable
-								onClick={() =>
-									setDisplay({ right: "SUNSROLE", display: "ROLE" })
-								}
-								aside
-								icon={
-									<MdOutlineCompare
-										className={
-											"w-6 h-6 m-2 " +
-											(display?.display === "ROLE" &&
-											display?.right === "SUNSROLE"
-												? "text-orange-800"
-												: "")
-										}
-									/>
-								}
-							/>
-						</div>
 
 						{/* DEVELOPER INFO! */}
 						<div className="">

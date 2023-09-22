@@ -1,3 +1,4 @@
+"use client";
 "use strict";
 exports.__esModule = true;
 var recoil_1 = require("recoil");
@@ -17,7 +18,6 @@ function MainRight() {
                     (display === null || display === void 0 ? void 0 : display.display) === "USER" && (display === null || display === void 0 ? void 0 : display.right) === "SUNSUSER" && (React.createElement(React.Fragment, null,
                         React.createElement(EmpTabsMain_1["default"], null))),
                     (display === null || display === void 0 ? void 0 : display.display) === "ROLE" && (display === null || display === void 0 ? void 0 : display.right) === "" && (React.createElement(React.Fragment, null,
-                        React.createElement(RoleDetail_1["default"], null))),
-                    (display === null || display === void 0 ? void 0 : display.display) === "ROLE" && (display === null || display === void 0 ? void 0 : display.right) === "SUNSROLE" && (React.createElement(React.Fragment, null, "SUNSROLE")))))));
+                        React.createElement(RoleDetail_1["default"], null))))))));
 }
 exports["default"] = MainRight;

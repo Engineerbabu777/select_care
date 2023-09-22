@@ -1,22 +1,15 @@
 "use client";
 
 import Card from "@/components/shared/Card";
-import { roles } from "@/constants/data";
-import useRole from "@/hooks/role.hooks";
 import { useEffect } from "react";
 import { roleState } from "@/recoil/roleState";
 import { useRecoilState } from "recoil";
 import { PulseLoader } from "react-spinners"; //IF NEEDED WILL PUSH TO NEW FILE!
 import Heading from "@/components/shared/Heading";
+import TopDetails from "@/components/shared/TopDetails";
 
 export default function RoleMain() {
-	const { getRoles } = useRole();
-
 	const [role, setRole] = useRecoilState(roleState);
-
-	useEffect(() => {
-		getRoles();
-	}, []);
 
 	return (
 		<>
@@ -24,7 +17,7 @@ export default function RoleMain() {
 				<Card>
 					<div className="h-full flex flex flex-col">
 						{/* HEADER */}
-						<Heading heading={"Manage Roles"}/>
+						<Heading heading={"Manage Roles"} />
 
 						{/* LOADING STATE IF GETTING DATA! */}
 						{role.loadingRoles && (
@@ -38,19 +31,31 @@ export default function RoleMain() {
 							</div>
 						)}
 
-						{/* LIST OF USERS! */}
+						{/* IF ROLES LENGTH ARE LESS THAN 1 SHOW SMALL TEXT!*/}
+
+						{/* LIST OF ROLES! */}
 						{!role.loadingRoles && (
-							<div className="border-gray-300 bg-gray-50 overflow-auto m-2 custom-scroll ">
-								<div className=" flex-1  ">
-									{role?.roles?.length > 0 &&
-										role?.roles?.map((r: any, ind: number) => (
-											<div
-												key={ind}
-												className="text-md text-[#3abff8] transition-all duration-300 hover:text-blue-600 cursor-pointer hover:bg-gray-200 border-b border-gray-300 py-1 px-2"
-											>
-												<h1 className="hover:underline">{r?.title}</h1>
-											</div>
-										))}
+							<div className="flex flex-col overflow-hidden mb-2 mt-1 mx-2">
+								{/* // SMALL HEADING! */}
+								<TopDetails
+									length={11} //WILL CHANGE IT TO DYNAMIC LATER
+									smallHeading={"Roles"}
+								/>
+
+								{/* // TABLE DETAILS */}
+								<div className="border-gray-300 bg-gray-50 overflow-auto custom-scroll ">
+									<div className=" flex-1  ">
+										{role?.roles?.length > 0 &&
+											role?.roles?.map((r: any, ind: number) => (
+												<div
+													onClick={() => setRole({ ...role, selectedRole: r })}
+													key={ind}
+													className="text-md text-[#3abff8] transition-all duration-300 hover:text-blue-600 cursor-pointer hover:bg-gray-200 border-b border-gray-300 py-1 px-2"
+												>
+													<h1 className="hover:underline">{r?.title}</h1>
+												</div>
+											))}
+									</div>
 								</div>
 							</div>
 						)}

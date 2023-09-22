@@ -1,3 +1,6 @@
+'use client';
+
+
 import { employeeState } from "@/recoil/employeeState";
 import { employeeValidation } from "@/utils/user/employeeValidations";
 import { useRecoilState } from "recoil";
@@ -7,7 +10,7 @@ export default function useEmployee() {
 	const [users, setUsers] = useRecoilState(employeeState); // CHANGE TO EMPLOYEE!
 
 	// GET ALL ROLES!
-	const getEmployees = () => {
+	const getEmployees = async() => {
 		setUsers({ ...users, loadingEmployees: true });
 		try {
 			// MAKE A GET REQUEST! (PUT IN TRY CATCH AT LAST!)!
@@ -26,10 +29,14 @@ export default function useEmployee() {
 					});
 				})
 				.catch((err: any) => {
+					toast.error('FETCHING ERROR-> ', err.message)
+
 					setUsers({ ...users, loadingEmployees: false });
 					// WILL WRITE HERE LATER  MORE !!!
 				});
-		} catch (err: any) {}
+		} catch (err: any) {
+			toast.error('FETCHING ERROR-> ',err.message)
+		}
 
 		// VALIDATE IF ERROR EXITS OR NOT !!
 	};

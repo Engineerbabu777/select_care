@@ -4,7 +4,7 @@ import recoil from 'recoil';
 
 export interface displayStateInterface {
     display: 'USER' | 'ROLE' | 'DEV';
-    right: 'SUNSUSER' | 'SUNSROLE' | '';
+    right: 'SUNSUSER' | '';
     
 }
 

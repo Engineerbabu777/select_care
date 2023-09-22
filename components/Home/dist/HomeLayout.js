@@ -3,7 +3,6 @@
 exports.__esModule = true;
 var react_1 = require("react");
 function HomeLayout(_a) {
-    // SAME CLASSES WILL BE MOVE TO CSS FILE(AT END) !!!
     var children = _a.children;
     return (react_1["default"].createElement(react_1["default"].Fragment, null,
         react_1["default"].createElement("main", { className: "flex gap-2 w-full h-full lg:h-[calc(100vh-55px)] mt-14" },

@@ -18,7 +18,7 @@ export default function SaveButton({ onClick, loading = false }: Props) {
 				disabled={loading}
 				type="button"
 				className={
-					"flex py-2 text-green-600 hover:text-white hover:bg-green-400 transition duration-300 gap-2 items-center justify-center bg-green-300 shadow-sm rounded-md w-full"
+					"bg-green-200 border-green-500 text-green-600 hover:bg-green-300 flex gap-1 items-center rounded-full px-3 py-1 "
 				}
 				onClick={onClick}
 			>

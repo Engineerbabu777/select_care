@@ -1,3 +1,5 @@
+"use client";
+
 import CloseButton from "@/components/shared/CloseButton";
 import Input from "@/components/shared/Input";
 import SaveButton from "@/components/shared/SaveButton";
@@ -53,9 +55,7 @@ export default function RoleModalBody({ closeModal }: Props) {
 					"Human resources (HR) is a department in a company that is responsible for managing the company's workforce. This includes tasks such as recruiting, hiring, onboarding, training, and developing employees. HR is also responsible for ensuring that the company complies with employment laws and regulations, and that it provides a safe and healthy work environment for its employees"
 				}
 				require
-				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-					onChangeHandler(e, setRole, role)
-				}
+				onChange={(e: any) => onChangeHandler(e, setRole, role)}
 			/>
 
 			{/* IS-ACTIVE SELECT BOX! (WILL PUSH TO NEW FILE) */}
@@ -93,7 +93,7 @@ export default function RoleModalBody({ closeModal }: Props) {
 				</div>
 			</div>
 
-			<div className="flex items-center w-full mt-6 gap-2">
+			<div className="flex items-center w-full mt-6 justify-between">
 				<CloseButton onClick={closeModal} />
 				{/* SUBMIT BUTTON! */}
 				<SaveButton onClick={onSubmit} />

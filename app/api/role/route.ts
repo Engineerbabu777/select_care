@@ -24,17 +24,15 @@ export async function POST(request: Request) {
 	}
 }
 
-
-
 // FUNCTION MAKING GET REQUEST!
 export async function GET(request: Request) {
 	try {
 		databaseConnect();
 
 		// GETTING ALL ROLES!
-        const roles = await roleModel.find({});
-        
-        console.log('SERVER IS SAYING HELLO!');
+		const roles = await roleModel.find({});
+
+		console.log("SERVER IS SAYING HELLO!");
 
 		return NextResponse.json({ success: true, roles });
 	} catch (err: any) {
@@ -42,11 +40,44 @@ export async function GET(request: Request) {
 	}
 }
 
-
 // DELETE REQUEST!
-export async function DELETE(request: Request) { }
+export async function DELETE(request: Request) {
+	try {
+		let url = new URL(request.url);
 
+		let id = url.searchParams.get("id");
 
+		// DELETION FROM DATABASE!
+
+		const result = await roleModel.findByIdAndDelete(id);
+
+		// RETURNING RESPONSE!
+		return NextResponse.json({
+			success: true,
+			message: "Deletion Successful!",
+			result,
+		});
+	} catch (err: any) {
+		return NextResponse.json({ error: true, message: "Deletion Failed!" });
+	}
+}
 
 // PUT REQUEST!
-export async function PUT(request: Request) { }
+// PUT REQUEST!
+export async function PUT(request: Request) {
+	try {
+		const body = await request.json();
+		const { _id, description, title, isActive } = body;
+
+		// UPDATED DATA!
+		const updatedDoc = await roleModel.findByIdAndUpdate(_id, {
+			description,
+			title,
+			isActive,
+		});
+
+		return NextResponse.json({ success: true, updatedDoc });
+	} catch (error: any) {
+		NextResponse.json({ error: true, message: error?.message });
+	}
+}

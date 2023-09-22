@@ -9,6 +9,7 @@ interface RoleStateInterface {
 	loadingRoles: Boolean;
 	totalNumberOfRoles: Number;
 	roles: any;
+	selectedRole: any;
 
 	// FOR BOTTOM PAGINATION(MIGHT BE NEED)!
 }
@@ -18,6 +19,7 @@ const initialState: RoleStateInterface = {
 	loadingRoles: false,
 	totalNumberOfRoles: 0,
 	roles: [],
+	selectedRole:null,
 };
 
 // EXPORTING STATE!

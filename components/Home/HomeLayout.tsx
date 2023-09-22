@@ -1,12 +1,14 @@
 'use client';
-import React from "react";
+
+import React, { useEffect } from "react";
 
 type Props = {
 	children: any;
 };
 
 export default function HomeLayout({ children }: Props) {
-	// SAME CLASSES WILL BE MOVE TO CSS FILE(AT END) !!!
+
+
 
 	return (
 		<>

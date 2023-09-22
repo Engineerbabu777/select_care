@@ -1,12 +1,12 @@
 "use client";
 
 type Props = {
-	label?: String;
-	name?: String;
-	placeholder?: String;
-	type?: String;
-	require?: Boolean;
-	onChange?: unknown; // WILL CHANGE THIS LATER!
+	label?: string;
+	name?: any;
+	placeholder?: string;
+	type?: string;
+	require?: boolean;
+	onChange?: any; // WILL CHANGE THIS LATER!
 };
 
 export default function Input({
@@ -19,7 +19,7 @@ export default function Input({
 }: Props) {
 	return (
 		<>
-			{/* LABEL! */}
+			
 			<label
 				htmlFor={name}
 				className="text-md font-semibold text-gray-500 -mb-2"

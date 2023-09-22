@@ -1,3 +1,4 @@
+'use client';
 import CloseButton from "@/components/shared/CloseButton";
 import Input from "@/components/shared/Input";
 import SaveButton from "@/components/shared/SaveButton";
@@ -17,6 +18,8 @@ export default function UserModalBody({ closeModal }: Props) {
 	const [loading, setLoading] = useState(false);
 
 	const { createNewEmployee, getEmployees } = useEmployee();
+
+	
 
 	// STATES!
 	const [user, setUser] = useState<{
@@ -103,22 +106,26 @@ export default function UserModalBody({ closeModal }: Props) {
 							No-Role
 						</option>
 						{role?.roles.length > 0 &&
-							role?.roles?.map((r: any) => (
-								<>
-									<option
-										value={r?._id}
-										className=" bg-gray-100 hover:bg-400 text-black hover:text-gray-700"
-									>
-										{r?.title}
-									</option>
-								</>
-							))}
+							role?.roles?.map((r: any) => {
+								if (r?.isActive === 'false') return; // THAT MEANS THE ROLE IS UNAVAILABLE!
+								// ELSE RETURN THE AVAILABLE ROLES!
+								return(
+									<>
+										<option
+											value={r?._id}
+											className=" bg-gray-100 hover:bg-400 text-black hover:text-gray-700"
+										>
+											{r?.title}
+										</option>
+									</>
+								)
+							})}
 					</select>
 				</div>
 			</div>
 
 			{/* SUBMIT BUTTON! */}
-			<div className="flex items-center w-full mt-6 gap-2">
+			<div className="flex items-center justify-between w-full mt-6 gap-2">
 				<CloseButton onClick={closeModal} />
 				<SaveButton
 					loading={loading}

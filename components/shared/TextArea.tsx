@@ -1,7 +1,7 @@
 "use client";
 
 type Props = {
-	onChange: () => void;
+	onChange: any;
 	placeholder: string;
 	name: string;
 	label: string;
