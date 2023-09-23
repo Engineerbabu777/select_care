@@ -59,11 +59,15 @@ export default function useRole() {
 				});
 
 				const newDocs = await getRoles();
+				// GIVING SUCCESS TOAST!
+				toast.error('NEW ROLE SUCCESSFUL!');
 
 				console.log(data, newDocs);
 				return { success: true };
 			}
 		} catch (err: any) {
+			// GIVING ERROR TOAST NOTIFICATION!
+			toast.error(err.message)
 			// IF ERROR WE WILL PRINT TO CONSOLE!
 			console.log("HELLO FROM USE ROLE HOOK!");
 			return { error: err.message }; // RETURNING ERROR WHILE CREATING ROLE!

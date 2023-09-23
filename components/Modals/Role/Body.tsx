@@ -26,6 +26,7 @@ export default function RoleModalBody({ closeModal }: Props) {
 
 	const onSubmit = async () => {
 		const data = await createNewRole(role); // CALLING THE FUNCTION TO CREATE NEW ROLE!
+		if (data?.error) return;
 		setRole({ title: "", description: "", isActive: true }); // RESET STATE!
 		closeModal(); // CLOSE THE MODAL!
 	};

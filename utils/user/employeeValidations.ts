@@ -1,7 +1,22 @@
+function validateEmail(email: string) {
+	// CHECK IF EMAIL CONSISTS OF EMPTY SPACES THEN RETURN FALSE!
+	if (email.includes(' ')) return false;
 
+	// CHECK IF EMAIL CONTAINS @ SIGN LENGTH MUST BE EQUAL TO ONE ELSE RETURN FALSE!
+	if (!(email.includes("@")) || (email.indexOf("@") !== email.lastIndexOf("@"))) return false;
+		
+	// CHECK IF EMAIL CONTAINS . LENGTH MUST BE ONE ELSE RETURN FALSE!
+	if (!(email.includes(".")) || (email.indexOf(".") !== email.lastIndexOf("."))) return false;
 
+	// CHECK IF . IS AFTER THE @ ELSE RETURN FALSE!
+	if (email.indexOf(".") < email.indexOf("@")) return false;
 
+	// ALSO CHECK LENGTH OF EMAIL SHOULD AT LEAST BE 7!
+	if (email.length < 7) return false;
 
+	// ELSE RETURN TRUE!
+	return true;
+}
 
 export const employeeValidation = (
 	first: string,
@@ -21,6 +36,12 @@ export const employeeValidation = (
 		throw new Error("Email is required!");
 	}
 
-    return true;
-    
+	// CHECK FOR VALID EMAIL!
+	const isValid = validateEmail(email.trim());
+
+	if (!isValid) {
+		throw new Error("Invalid Email!");
+	}
+
+	return true;
 };

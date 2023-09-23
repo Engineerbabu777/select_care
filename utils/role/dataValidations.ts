@@ -2,7 +2,9 @@
 
 
 
-export const validateRoleData = (title:string, description:string, active:boolean) => {
+export const validateRoleData = (title: string, description: string, active: boolean) => {
+    
+    if(!title.trim() || !description.trim()) throw new Error('All Fields must be filled')
 
     // CHECK IF TITLE IS LESS THAN 2!
     if (title.trim().length<2) {
