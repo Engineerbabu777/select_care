@@ -15,7 +15,7 @@ type Props = {
 
 export default function RoleModalBody({ closeModal }: Props) {
 	// CUSTOM ROLE HOOK!
-	const { createNewRole, getRoles } = useRole();
+	const { createNewRole } = useRole();
 
 	// STATES!
 	const [role, setRole] = useState({
@@ -28,9 +28,6 @@ export default function RoleModalBody({ closeModal }: Props) {
 		const data = await createNewRole(role); // CALLING THE FUNCTION TO CREATE NEW ROLE!
 		setRole({ title: "", description: "", isActive: true }); // RESET STATE!
 		closeModal(); // CLOSE THE MODAL!
-
-		// INSTEAD OF WAITING FOR DATA TO COME WE WILL UPDATE THE STATE DIRECTLY FROM OUR ROLE STATE
-		//(IMPROVING UI INTERFACE FOR BETTER EXPERIENCE USER WON'T WAIT MUCH WAIT)!
 	};
 
 	return (

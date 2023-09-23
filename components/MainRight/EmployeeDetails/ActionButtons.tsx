@@ -27,6 +27,7 @@ export default function ActionButtons({
 }: Props) {
 	return (
 		<>
+			{/* WILL SHIFT THIS COMPONENT TO SHARED BUT LATER! AND MAKE IT MORE CONCISE! */}
 			<div className="flex w-full h-full justify-between items-end">
 				<div className="flex justify-between items-center w-full">
 					<button

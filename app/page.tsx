@@ -5,10 +5,11 @@ import useEmployee from "@/hooks/employee.hooks";
 export default function Home() {
 
 
-	// (!AUTHENTICATION) REFERS TO /LOGIN PAGE (WILL IMPLEMENT-AT-END!)!
+	// (!AUTHENTICATION) REFERS TO /LOGIN PAGE (WILL IMPLEMENT FUTURE!)!
 
 	return (
 		
+		// MAIN COMPONENT BODY!!
 		<Body />
 
 	);

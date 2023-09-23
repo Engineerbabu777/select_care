@@ -1,31 +1,27 @@
-"use client";
-
-import Card from "../shared/Card";
-import IconComponent from "../shared/IconComponent";
+import { displayStateAtom } from "@/recoil/display-state";
+import { useRecoilState } from "recoil";
 import {
-	MdCompost,
 	FaIdCardClip,
 	IoIosAddCircle,
+	MdCompost,
 	MdEngineering,
 	RiGroup2Fill,
 } from "@/icons/icons";
-import { useRecoilState } from "recoil";
-import { displayStateAtom } from "@/recoil/display-state";
-import { useState } from "react";
+import IconComponent from "../shared/IconComponent";
+import { ModalState } from "@/recoil/modelState";
 import Modal from "../shared/Modal";
 import UserModalBody from "../Modals/User/Body";
 import RoleModalBody from "../Modals/Role/Body";
-import { ModalState } from "@/recoil/modelState";
+import Card from "../shared/Card";
 import SidebarFixedBarIcons from "../shared/SidebarFixedBarIcons";
 
-export default function SidebarMain() {
-	// WILL REMOVE DIVISIONS AT END AS WELL CREATE COMPONENT FOR ICON-DIV!
+export default function FixedNavbar() {
 	const [display, setDisplay] = useRecoilState(displayStateAtom);
 	const [modalState, setModalState] = useRecoilState(ModalState);
-	
+
 	// FUNCTION FOR SHOW/NO-SHOW MODAL! (WILL MOVE THIS TO UTILS!)
 	const toggleModal = () => {
-		setModalState({...modalState,isOpen:!modalState.isOpen}); // TOGGLING THE STATE!
+		setModalState({ ...modalState, isOpen: !modalState.isOpen }); // TOGGLING THE STATE!
 	};
 
 	return (
@@ -46,12 +42,10 @@ export default function SidebarMain() {
 					)
 				}
 			/>
-
-			<div className="w-full max-w-[3rem] mx-auto h-full flex">
+			<div className="mx-4">
 				<Card>
-					{/* SIDE-BAR-ICONS */}
-					<div className="mt-4 px-1 gap-2 flex flex-col items-center  ">
-						<SidebarFixedBarIcons aside/>
+					<div className="flex gap-1 px-4 justify-between items-center">
+						<SidebarFixedBarIcons header />
 					</div>
 				</Card>
 			</div>

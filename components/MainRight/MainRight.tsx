@@ -6,6 +6,7 @@ import { displayStateAtom } from "@/recoil/display-state";
 import EmployeeDetail from "./EmployeeDetails/Employee";
 import RoleDetail from "./RoleDetails/RoleDetail";
 import EmpTabsMain from "./Assign-N-notAssign-Employees/EmpTabsMain";
+import DeveloperInfo from "./DeveloperInfo/DeveloperInfo";
 
 export default function MainRight() {
 	const [display, setDisplay] = useRecoilState(displayStateAtom);
@@ -35,6 +36,12 @@ export default function MainRight() {
 						{display?.display === "ROLE" && display?.right === "" && (
 							<>
 								<RoleDetail />
+							</>
+						)}
+
+						{display?.display === "DEV" && (
+							<>
+								<DeveloperInfo />
 							</>
 						)}
 

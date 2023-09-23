@@ -15,7 +15,7 @@ export default function SaveButton({ onClick, loading = false }: Props) {
 	return (
 		<>
 			<button
-				disabled={loading}
+				disabled={loading} // WILL DISABLE IF LOADING!
 				type="button"
 				className={
 					"bg-green-200 border-green-500 text-green-600 hover:bg-green-300 flex gap-1 items-center rounded-full px-3 py-1 "

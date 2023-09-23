@@ -1,7 +1,6 @@
 "use client";
 
 import Card from "@/components/shared/Card";
-import { useEffect } from "react";
 import { roleState } from "@/recoil/roleState";
 import { useRecoilState } from "recoil";
 import { PulseLoader } from "react-spinners"; //IF NEEDED WILL PUSH TO NEW FILE!
@@ -38,7 +37,7 @@ export default function RoleMain() {
 							<div className="flex flex-col overflow-hidden mb-2 mt-1 mx-2">
 								{/* // SMALL HEADING! */}
 								<TopDetails
-									length={11} //WILL CHANGE IT TO DYNAMIC LATER
+									length={role.totalNumberOfRoles as number}
 									smallHeading={"Roles"}
 								/>
 

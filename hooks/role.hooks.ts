@@ -1,28 +1,30 @@
-'use client';
+
 
 import { validateRoleData } from "@/utils/role/dataValidations";
 import { roleState } from "@/recoil/roleState";
 import { useRecoilState } from "recoil";
 import toast from "react-hot-toast";
-import { useEffect } from 'react';
+
 
 export default function useRole() {
+
 	// REQUIRED STATES!
 	const [role, setRole] = useRecoilState(roleState);
 
+
 	// GET ALL ROLES!
 	const getRoles = async () => {
-		setRole({ ...role, loadingRoles: true });
+		setRole({ ...role, loadingRoles: true }); // THAT WILL SHOW LOADING!!
 
 		// MAKE A GET REQUEST! (PUT IN TRY CATCH AT LAST!)!
 		fetch("/api/role")
 			.then((response: any) => {
 				response.json().then((data: any) => {
 					setRole({
-						roles: data?.roles,
-						totalNumberOfRoles: data?.roles?.length,
-						loadingRoles: false,
-						selectedRole: null,
+						roles: data?.roles, // SETTING ROLES COMING FROM DB!
+						totalNumberOfRoles: data?.roles?.length, // SETTING LENGTH OF ROLES FROM DB!
+						loadingRoles: false, // THAT WILL STOP THE LOADING AND WILL MAP THROUGH ROLES TO B VIEW ON PAGE!
+						selectedRole: null, // INITIALLY NON-ROLE IS SELECTED!
 					});
 				});
 			})
@@ -31,13 +33,13 @@ export default function useRole() {
 				// WILL WRITE HERE LATER  MORE !!!
 			});
 
-		// VALIDATE IF ERROR EXITS OR NOT !!
 	};
 
 
 	// CREATE NEW ROLE!
 	const createNewRole = async (role: any) => {
 		try {
+
 			// VALIDATE DATA!
 			const validator = validateRoleData(
 				role.title,
@@ -45,6 +47,7 @@ export default function useRole() {
 				role.isActive
 			);
 
+			// NO ERROR SO WE CAN MOVE FORWARD POST REQUEST!
 			if (validator) {
 				const data = await fetch("/api/role", {
 					method: "POST",
@@ -61,8 +64,9 @@ export default function useRole() {
 				return { success: true };
 			}
 		} catch (err: any) {
+			// IF ERROR WE WILL PRINT TO CONSOLE!
 			console.log("HELLO FROM USE ROLE HOOK!");
-			return { error: err.message };
+			return { error: err.message }; // RETURNING ERROR WHILE CREATING ROLE!
 		}
 	};
 
@@ -84,10 +88,13 @@ export default function useRole() {
 				response.json().then((data: any) => console.log(data))
 			);
 
+			// GIVING TOAST NOTIFICATION OF SUCCESS!
 			toast.success("DELETION SUCCESSFUL!");
 
 			// THAT MEANS EVERYTHING IS OK FETCH REFRESH DATA!
 		} catch (error: any) {
+			// GIVING TOAST NOTIFICATION OF ERROR!
+			toast.success("DELETION FAILED!");
 			console.log("DELETION ERROR:-> ", error.message);
 		}
 	};
@@ -96,11 +103,12 @@ export default function useRole() {
 	const editRole = () => {
 		const { _id, title, description, isActive } = role?.selectedRole;
 		try {
+			// VALIDATING OUR DATA!
 			const validator = validateRoleData(title, description, isActive);
 
 			const body = { title, description, isActive, _id };
 
-			// EVERTING IS OK!
+			// EVERTING IS OK NOW MOVE TO PUT REQUEST!
 			if (validator) {
 				// UPDATE DATA IN DATABASE!
 				fetch("/api/role", {
@@ -116,16 +124,24 @@ export default function useRole() {
 					)
 					.catch((er: any) => console.log(er?.message));
 			}
+			// PUT REQUEST SUCCEED NOTIFICATION!
 			toast.success("EDIT SUCCESSFUL!");
 			getRoles(); // GETTING FRESH ROLES!
 			return { success: true, message: "Roles updated successfully!" };
 		} catch (err: any) {}
 	};
 
+
+	// CLEAR SELECTED ROLE!
+	const clearSelectedRole = () => {
+		setRole({...role,selectedRole:null})
+	}
+
 	return {
 		createNewRole,
 		deleteRole,
 		editRole,
 		getRoles,
+		clearSelectedRole
 	};
 }

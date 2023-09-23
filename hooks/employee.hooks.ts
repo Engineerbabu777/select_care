@@ -1,4 +1,3 @@
-'use client';
 
 
 import { employeeState } from "@/recoil/employeeState";
@@ -7,43 +6,49 @@ import { useRecoilState } from "recoil";
 import toast from "react-hot-toast";
 
 export default function useEmployee() {
-	const [users, setUsers] = useRecoilState(employeeState); // CHANGE TO EMPLOYEE!
+	const [employees, setEmployees] = useRecoilState(employeeState); // CHANGE TO EMPLOYEE!
 
-	// GET ALL ROLES!
-	const getEmployees = async() => {
-		setUsers({ ...users, loadingEmployees: true });
+	// GET ALL EMPLOYEES!
+	const getEmployees = async () => {
+		setEmployees({ ...employees, loadingEmployees: true });
 		try {
-			// MAKE A GET REQUEST! (PUT IN TRY CATCH AT LAST!)!
+			// MAKE A GET REQUEST! !
 			fetch("/api/employee")
 				.then((response: any) => {
 					response.json().then((data: any) => {
-						setUsers({
+						setEmployees({
 							employees: data?.employees, // SETTING ALL EMPLOYEES
 							totalNumberOfEmployee: data?.employees?.length, // SETTING TOTAL NUMBER OF EMPLOYEES!
 							loadingEmployees: false, // LOADING STATE!
 							selectedOne: null, // SELECTED EMPLOYEE INITIAL STATE!
-							assigned: data?.employees?.filter((emp:any) => emp?.role !== null), // ANY ROLE!
-							nonAssigned: data?.employees?.filter((emp: any) => emp?.role === null), // NO-ROLE EMPLOYEES
+							assigned: data?.employees?.filter(
+								(emp: any) => emp?.role !== null
+							), // ANY ROLE!
+							nonAssigned: data?.employees?.filter(
+								(emp: any) => emp?.role === null
+							), // NO-ROLE EMPLOYEES
 						});
-						console.log("CLIENT EMPLOYEE->", data);
 					});
 				})
 				.catch((err: any) => {
-					toast.error('FETCHING ERROR-> ', err.message)
+					// GIVING ERROR NOTIFICATION!
+					toast.error("FETCHING ERROR-> ", err.message);
 
-					setUsers({ ...users, loadingEmployees: false });
+					setEmployees({ ...employees, loadingEmployees: false });
 					// WILL WRITE HERE LATER  MORE !!!
 				});
 		} catch (err: any) {
-			toast.error('FETCHING ERROR-> ',err.message)
+			// GIVING ERROR NOTIFICATION!
+			toast.error("FETCHING ERROR-> ", err.message);
 		}
 
 		// VALIDATE IF ERROR EXITS OR NOT !!
 	};
 
-	// CREATE NEW ROLE!
+	// CREATE NEW EMPLOYEE!
 	const createNewEmployee = async (user: any) => {
 		try {
+			// VALIDATING DATA!
 			const validator = employeeValidation(
 				user.firstName,
 				user.lastName,
@@ -52,33 +57,40 @@ export default function useEmployee() {
 
 			// MAKE A POST REQUEST TO SAVE DATA IN OUR DATABASE!
 			if (validator) {
-				fetch("/api/employee", {
+				const result = await fetch("/api/employee", {
 					method: "POST",
 					headers: {
 						"Content-Type": "application/json",
 						accept: "application/json",
 					},
 					body: JSON.stringify(user),
-				}).then((response: any) =>
-					response.json().then((data: any) => {
-						setUsers({ ...users, employees: data?.employees });
-					})
-				);
-				getEmployees();
-				return { success: true, message: "Employee created successfully!" };
+				});
+
+				const data = await result.json();
+
+				// IF ERROR THEN RETURN ERROR!
+				if(data.error){
+					return { error: true, message: data.message };
+				}
+				
+				getEmployees(); // AFTER CREATING NEW EMPLOYEE GETTING FRESH EMPLOYEES DATA!
+				return { success: true, message: "Employee created successfully!" }; // RETURNING SUCCESS MESSAGE!
 			}
 		} catch (err: any) {
+			// GIVING TOAST NOTIFICATION!
+			toast.error(err.message)
+			console.log('ERROR WHILE CREATING NEW EMPLOYEE-> ',err);
 			return { error: true, message: err.message };
 		}
 	};
 
-	// DELETE ANY ROLE!
+	// DELETE ANY EMPLOYEE!
 	const deleteEmployee = (id: string) => {
 		try {
 			// DELETE FROM STATE!
-			setUsers({
-				...users,
-				employees: users?.employees.filter((u: any) => u._id !== id),
+			setEmployees({
+				...employees,
+				employees: employees?.employees.filter((u: any) => u._id !== id),
 				selectedOne: null,
 			}); // THAT WILL REMOVE DELETION ID AND MAKE SELECTED NULL ON RIGHT SIDE!
 
@@ -99,13 +111,15 @@ export default function useEmployee() {
 		}
 	};
 
-	// EDIT ANY ROLE!
+	// EDIT ANY EMPLOYEE
+	
 	const editEmployee = async () => {
-		const { firstName, lastName, email, role, _id } = users.selectedOne;
 
-		// console.log('NEW ROLE ID', role._id, "ACTUAL ROLE: ",role,users.selectedOne);
+		const { firstName, lastName, email, role, _id } = employees.selectedOne; // DESTRUCTURING SELECTED-ONE OBJECT!
+
 
 		try {
+			// VALIDATING DATA!
 			const validator = employeeValidation(firstName, lastName, email);
 			const body = {
 				firstName,
@@ -131,6 +145,7 @@ export default function useEmployee() {
 					.catch((er: any) => console.log(er?.message));
 			}
 
+			// GIVING SUCCESS NOTIFICATION!
 			toast.success("EDIT SUCCESSFUL!");
 			getEmployees(); // GETTING FRESH EMPLOYEES!
 			return { success: true, message: "Employee updated successfully!" };
@@ -140,11 +155,17 @@ export default function useEmployee() {
 		}
 	};
 
+	// CLEAR SELECTED ROLE!
+	const clearSelectedEmployee = () => {
+		setEmployees({ ...employees, selectedOne: null });
+	};
+
 	return {
 		createNewEmployee,
-		users,
+		employees,
 		getEmployees,
 		deleteEmployee,
 		editEmployee,
+		clearSelectedEmployee,
 	};
 }

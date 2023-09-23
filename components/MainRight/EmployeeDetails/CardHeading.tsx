@@ -28,7 +28,6 @@ export default function CardHeading({
 	employeeView=false,
 }: Props) {
 
-	console.log("HY-> ",role);
 	return (
 		<>
 			{/* // IF USER/ROLE IS SELECTED! */}

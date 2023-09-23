@@ -7,7 +7,7 @@ import { roleState } from "@/recoil/roleState";
 import { onChangeHandler } from "@/utils/user/onChangeHandler";
 import React, { useState, useEffect } from "react";
 import { useRecoilState } from "recoil";
-import { toast } from "react-hot-toast";
+import { onSubmitHandlerEmployee } from "@/utils/user/onSubmitHandler";
 
 type Props = {
 	closeModal: () => void; // FUNCTION TO CLOSE MODAL!
@@ -17,9 +17,7 @@ export default function UserModalBody({ closeModal }: Props) {
 	const [role, setRole] = useRecoilState(roleState);
 	const [loading, setLoading] = useState(false);
 
-	const { createNewEmployee, getEmployees } = useEmployee();
-
-	
+	const { createNewEmployee } = useEmployee();
 
 	// STATES!
 	const [user, setUser] = useState<{
@@ -36,23 +34,9 @@ export default function UserModalBody({ closeModal }: Props) {
 
 	// WILL CHANGE ANY TYPES LATER!
 
-	// SUBMIT HANDLER! (WILL PUT THIS SEP.....)
+	// SUBMIT HANDLER! 
 	const onSubmitHandler = async () => {
-		setLoading(true);
-		const data = await createNewEmployee(user);
-
-		if (data?.error) {
-			toast.error(data?.message); // WILL CONVERT THIS TO JSX!
-			setLoading(false);
-			return;
-		}
-
-		if (data?.success) {
-			toast.success(data?.message);
-			setLoading(false);
-			setUser({ firstName: "", lastName: "", role: "", email: "" });
-			closeModal();
-		}
+		onSubmitHandlerEmployee(createNewEmployee,setLoading,setUser,closeModal,user);
 	};
 
 	return (
@@ -105,7 +89,7 @@ export default function UserModalBody({ closeModal }: Props) {
 						>
 							No-Role
 						</option>
-						{role?.roles.length > 0 &&
+						{role?.roles?.length > 0 &&
 							role?.roles?.map((r: any) => {
 								if (r?.isActive === 'false') return; // THAT MEANS THE ROLE IS UNAVAILABLE!
 								// ELSE RETURN THE AVAILABLE ROLES!
@@ -124,7 +108,7 @@ export default function UserModalBody({ closeModal }: Props) {
 				</div>
 			</div>
 
-			{/* SUBMIT BUTTON! */}
+			{/* BUTTONS! */}
 			<div className="flex items-center justify-between w-full mt-6 gap-2">
 				<CloseButton onClick={closeModal} />
 				<SaveButton

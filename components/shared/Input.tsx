@@ -19,7 +19,7 @@ export default function Input({
 }: Props) {
 	return (
 		<>
-			
+			{/* LABEL TEXT! */}
 			<label
 				htmlFor={name}
 				className="text-md font-semibold text-gray-500 -mb-2"
@@ -35,6 +35,7 @@ export default function Input({
 				type={type}
 				name={name}
 				placeholder={placeholder}
+				// WILL MAKE INPUT STYLES BEAUTIFUL BUT LATER!
 				className="px-2 py-1 rounded-md outline-none focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400 text-gray-700 w-full border border-blue-500"
 			/>
 		</>

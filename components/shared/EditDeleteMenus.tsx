@@ -1,5 +1,8 @@
 import IconComponent from "./IconComponent";
 import { BiDotsVertical } from "@/icons/icons";
+import useRole from "@/hooks/role.hooks";
+import useEmployee from "@/hooks/employee.hooks";
+
 
 type Props = {
 	edit: boolean;
@@ -21,9 +24,12 @@ export default function EditDeleteMenus({
 	showDelete,
 }: Props) {
 
-    console.log(selectedOne)
+	const {clearSelectedRole} = useRole();
+	const {clearSelectedEmployee} = useEmployee();
+
 	return (
 		<>
+			{/* WILL MAKE THE COMPONENT MUCH SIMPLER BUT */}
 			<>
 				<div className="border-b flex items-center justify-between px-2 py-3 border-gray-300 text-2xl text-semibold text-gray-700 flex">
 					<h1>
@@ -74,6 +80,20 @@ export default function EditDeleteMenus({
 									}}
 								>
 									Delete
+								</p>
+								<p
+									className="cursor-pointer text-gray-500 bg-gray-100 hover:bg-gray-200 font-semibold text-sm px-6 py-2"
+									onClick={() => {
+										if (role) { // RIGHT NOW WE HAVE OPEN ROLE!!
+											clearSelectedRole();
+										} else { // ELSE WE OPEN ANY EMPLOYEE
+											clearSelectedEmployee();
+										}
+										 // CLEAR SELECTED ONE!
+										setShowDelete(!showDelete); // CLOSE THE MENU!
+									}}
+								>
+									Clear
 								</p>
 							</div>
 						)}
